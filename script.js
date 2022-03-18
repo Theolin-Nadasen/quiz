@@ -41,16 +41,29 @@ const quizData = [
     }
 ]
 
-question = document.getElementById("question")
+let question = document.getElementById("question")
 
-aText = document.getElementById("a-text")
-bText = document.getElementById("b-text")
-cText = document.getElementById("c-text")
-dText = document.getElementById("d-text")
+let aText = document.getElementById("a-text")
+let bText = document.getElementById("b-text")
+let cText = document.getElementById("c-text")
+let dText = document.getElementById("d-text")
 
-answerBtn = document.getElementById("answerBtn")
+let answerBtn = document.getElementById("answerBtn")
 
-currentQuestion = 0
+let currentQuestion = 0
+let answer = undefined
+let score = 0
+
+function getSelected(){
+    const answersEl = document.querySelectorAll(".answer")
+
+    answersEl.forEach((answerEl) => {
+        if(answerEl.checked){
+            answer = answerEl.id
+        }
+    })
+}
+
 
 function loadQuiz(){
     const currentQuizData = quizData[currentQuestion]
@@ -65,6 +78,14 @@ function loadQuiz(){
 loadQuiz()
 
 answerBtn.addEventListener("click",() => {
+    getSelected()
+    
+    if(answer == quizData[currentQuestion].answer){
+        console.log("correct")
+    }else{
+        console.log(answer, quizData[currentQuestion].answer)
+    }
+
     currentQuestion++
 
     if( currentQuestion < (quizData.length ) ){
