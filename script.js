@@ -41,31 +41,48 @@ const quizData = [
     }
 ]
 
+// question at the top of quiz
 let question = document.getElementById("question")
 
+// label with answers on them for the radio buttons
 let aText = document.getElementById("a-text")
 let bText = document.getElementById("b-text")
 let cText = document.getElementById("c-text")
 let dText = document.getElementById("d-text")
 
+// answer button at the bottom of quiz
 let answerBtn = document.getElementById("answerBtn")
 
 let currentQuestion = 0
 let answer = undefined
 let score = 0
 
+// gets all radio buttons. everything with class of answer.
+const answersEl = document.querySelectorAll(".answer")
+
+// gets the selected answer from the radio boxes
 function getSelected(){
-    const answersEl = document.querySelectorAll(".answer")
+    let checkedItem = undefined
 
     answersEl.forEach((answerEl) => {
         if(answerEl.checked){
-            answer = answerEl.id
+            checkedItem = answerEl.id
         }
+    })
+
+    answer = checkedItem
+}
+
+// deselect all radio buttons
+function deselectAll(){
+    answersEl.forEach((answerEl) => {
+        answerEl.checked = false
     })
 }
 
-
+// loads the quiz data into the html elements
 function loadQuiz(){
+    deselectAll()
     const currentQuizData = quizData[currentQuestion]
     question.textContent = currentQuizData.question
 
@@ -75,22 +92,33 @@ function loadQuiz(){
     dText.textContent = currentQuizData.d
 }
 
+// loads the quiz the first time
 loadQuiz()
 
 answerBtn.addEventListener("click",() => {
     getSelected()
-    
-    if(answer == quizData[currentQuestion].answer){
-        console.log("correct")
-    }else{
-        console.log(answer, quizData[currentQuestion].answer)
-    }
 
-    currentQuestion++
-
-    if( currentQuestion < (quizData.length ) ){
-        loadQuiz()
+    // checks if answer is not undefined
+    if(!answer){
+        console.log("pick something!")
     }else{
-        alert("You Finished!")
+
+            // checks if answer is correct
+        if(answer == quizData[currentQuestion].answer){
+            console.log("correct")
+            score++
+        }else{
+            console.log("wrong answer")
+        }
+
+
+        // handles changing the question
+        currentQuestion++
+
+        if( currentQuestion < (quizData.length ) ){
+            loadQuiz()
+        }else{
+            alert(`Score: ${score}`)
+        }
     }
 })
