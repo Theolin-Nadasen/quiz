@@ -1,0 +1,43 @@
+body{
+    background-image: linear-gradient(90deg, purple , blue);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.quizContainer{
+    background-image: linear-gradient(90deg, purple, blue);
+    border-radius: 20px;
+    box-shadow: 0 0 20px 5px black;
+}
+
+.quizhead{
+    padding: 50px;
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: white;
+}
+
+.quizhead ul{
+    list-style: none;
+    padding-left: 0;
+}
+
+.quizhead li{
+    margin-top: 20px;
+}
+
+.quizContainer button{
+    background-color: purple;
+    color: white;
+    font-size: 1.5rem;
+    font-weight: bold;
+    width: 100%;
+    height: 50px;
+    border-radius: 0 0 20px 20px;
+}
+
+.quizContainer button:hover{
+    background-color: rgb(83, 2, 83);
+}
